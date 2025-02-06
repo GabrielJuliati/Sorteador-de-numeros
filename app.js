@@ -3,20 +3,27 @@ function sortear(){
     let de = parseInt(document.getElementById("de").value)
     let ate = parseInt(document.getElementById("ate").value)
 
-    let sorteados = []
+    if (de >= ate) {
+        alert('Campo "Do número" deve ser inferior ao campo "Até o número". Verifique!');
+      }else if(quantidade > ate - de + 1){
+        alert('Campo "Quantidade de números" deve ter um numero possivel de ser gerado entre o campo "Do número" e o campo "Até o número". Verifique!');
+      }else{
 
-    for(let i = 0; i < quantidade; i++){
-        let numero = obterNumeroAleatorio(de, ate)
+      let sorteados = []
 
-        while(sorteados.includes(numero)){
-            numero = obterNumeroAleatorio(de, ate)
+      for(let i = 0; i < quantidade; i++){
+            let numero = obterNumeroAleatorio(de, ate)
+
+            while(sorteados.includes(numero)){
+               numero = obterNumeroAleatorio(de, ate)
+           }
+
+            sorteados.push(numero)
         }
 
-        sorteados.push(numero)
+     let resultado = document.getElementById("resultado").innerHTML = `<label class="texto__paragrafo">Números sorteados:  ${sorteados}</label>`
+        alterarStatusBotao()
     }
-
-    let resultado = document.getElementById("resultado").innerHTML = `<label class="texto__paragrafo">Números sorteados:  ${sorteados}</label>`
-    alterarStatusBotao()
 }
 
 function obterNumeroAleatorio(min, max){
